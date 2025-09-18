@@ -1,0 +1,51 @@
+@startuml
+package "Passage en caisse" {
+class Client {
+ - numCli : int
+ - coupons : boolean
+ - modeDePaiement : String[]
+ + payer()
+ + recupererTicket()
+}
+class Article {
+ - IDArticle : int
+ - libelle : String
+ - prix : double
+}
+class Caisse {
+ - numCaisse : int
+ - terminalBancaire : boolean
+ + ouvrir()
+ + fermer()
+ + afficherTotal()
+ + identifierArticle()
+ + imprimerTicket()
+ + enregistrerVente()
+ + indiquerMonnaie()
+}
+class SysAutor {
+ - typeAutor
+ + accepter()
+ + refuser()
+}
+}
+package Personnel {
+class Employe {
+ - IDEmploye : int
+ - poste : String
+}
+class Caissier extends Employe {
+ + enregistrerArticle()
+ + signalerFinVente()
+ + encaisserClient()
+}
+class Manager extends Employe {
+ + initialiserCaisse()
+}
+}
+Article "*" <|-- "1" Client : choisit
+Caisse "1" -- "*" Client : accueille
+Caisse "1" -- "*" Client : modeDePaiement
+Caisse "1" o-- "1" Caissier : affilié
+Caisse "1" -- "1" SysAutor : demande
+@enduml
