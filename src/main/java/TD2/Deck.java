@@ -1,4 +1,4 @@
-package cours.s2;
+package TD2;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Deck {
     
-    private List<Card> cards = new ArrayList<>();
+    protected List<Card> cards = new ArrayList<>();
 
     /**
      * Creates a deck of cards (one for each rank x suit) and shuffles it.
