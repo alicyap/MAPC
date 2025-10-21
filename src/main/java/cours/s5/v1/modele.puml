@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class ActionIllegale extends Exception {
+ {static} + this(msg: String)
+}
+
+interface IAmpoule {
+ + void allumer() (+ ActionIllegale)
+ + void eteindre() (+ ActionIllegale)
+}
+
+interface EtatAmpoule {
+ + allumer(): EtatAmpoule (+ ActionIllegale)
+ + eteindre(): EtatAmpoule (+ ActionIllegale)
+}
+
+class Ampoule implements IAmpoule {
+ {static} + this() // this.e = newEtatEteinte()
+ + void allumer() (+ ActionIllegale) // this.e = e.allumer()
+ + void eteindre() (+ ActionIllegale) // this.e = e.eteindre()
+}
+
+Ampoule *-> "-e" EtatAmpoule
+class EtatAllumee implements EtatAmpoule {
+ + allumer(): EtatAmpoule(+ ActionIllegale) // lever new ActionIllegale(msg)
+ + eteindre(): EtatAmpoule(+ ActionIllegale) // action + return new EtatEteinte()
+}
+
+class EtatEteinte implements EtatAmpoule {
+ + allumer(): EtatAmpoule(+ ActionIllegale) // action + return new EtatAllumee()
+ + eteindre(): EtatAmpoule(+ ActionIllegale) // lever new ActionIllegale(msg)
+}
+
+@enduml
