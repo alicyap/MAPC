@@ -1,0 +1,18 @@
+@startuml
+[*] --> AttenteArgent
+
+state AttenteArgent
+AttenteArgent --> CreditInsere : insérer argent
+
+state CreditInsere
+CreditInsere --> CreditInsere : insérer argent
+CreditInsere --> DelivrerBoisson : choisir boisson 1€ [crédit ≥ 1€]
+CreditInsere --> DelivrerBoisson : choisir boisson 2€ [crédit ≥ 2€]
+CreditInsere --> RendreMonnaie : demander remboursement
+
+state DelivrerBoisson
+DelivrerBoisson --> RendreMonnaie : fin délivrance
+
+state RendreMonnaie
+RendreMonnaie --> AttenteArgent : monnaie rendue
+@enduml

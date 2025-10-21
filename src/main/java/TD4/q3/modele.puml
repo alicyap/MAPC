@@ -1,0 +1,25 @@
+@startuml
+[*] --> Arrete
+' tester avec pasPayeFerme, pasPayeOuvert, payeFerme, payeOuvert
+state Arrete
+Arrete --> Ouvert : [argent == 2]
+
+state Ouvert{
+}
+
+state Ferme {
+}
+
+Ferme --> Ouvert
+Ouvert --> Ferme
+
+Ferme --> Demarre : demarrer
+
+state Demarre {
+    Demarre : do / secher
+}
+
+Demarre --> Arrete : [after 10 minutes]
+Demarre --> Ouvert
+Ouvert --> Arrete
+@enduml
